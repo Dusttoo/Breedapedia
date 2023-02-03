@@ -1,0 +1,22 @@
+.dashboard {
+    margin: 1rem;
+}
+
+.dashboard__title {
+    text-align: center;
+}
+
+.dashboard__content-container {
+    display: grid;
+        grid-template-columns: 25% 75%;
+        grid-template-areas:
+            "sidebar main";
+}
+
+.dashboard__main-content {
+    grid-area: main;
+}
+
+.dashboard__sidebar {
+    grid-area: sidebar;
+}

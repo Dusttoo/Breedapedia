@@ -1,16 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useSelector } from 'react-redux';
+import DashboardSidebar from './DashboardSidebar';
+import DashboardContent from './DashboardContent';
+import './dashboard.css'
 
 const Dashboard = () => {
   const user = useSelector((state) => state.session.user)
+  const [page, setPage] = useState('Main')
+  console.log(page)
   return (
-    <>
-      <h1>This is my dashboard</h1>
-      <p>{user.first_name}</p>
-      <p>{user.last_name}</p>
-      <img src={`${user.profile_img}`} alt={`${user.first_name} profile`} />
-      <p>Member since: {user.registered_at}</p>
-    </>
+    <div className='dashboard'>
+      <h1 className='dashboard__title'>This is my dashboard</h1>
+      <div className='dashboard__content-container'>
+        <DashboardSidebar setPage={setPage}/>
+        <DashboardContent user={user} page={page} />
+        <div className='dashboard__main-content'>
+        </div>
+      </div>
+      
+    </div>
     
   );
 };

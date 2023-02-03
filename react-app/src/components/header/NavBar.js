@@ -2,6 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import LogoutButton from '../auth/LogoutButton';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import './header.css'
 
 const NavBar = () => {
@@ -40,6 +42,13 @@ const NavBar = () => {
             Sign Up
           </NavLink>
         </li> }
+        {user && 
+        <li className='navbar__list-item'>
+          <NavLink to='/dashboard' exact={true} activeClassName='active'>
+            <FontAwesomeIcon className='logout__button' icon={faUser}/>
+          </NavLink>
+        </li>
+        }
         {user && 
         <li className='navbar__list-item'>
           <LogoutButton /> 
