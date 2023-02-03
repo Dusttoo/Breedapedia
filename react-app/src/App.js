@@ -9,6 +9,8 @@ import UsersList from './components/user/UsersList';
 import User from './components/user/User';
 import { authenticate } from './store/session';
 import Dashboard from './components/dashboard/Dashboard';
+import AllDogs from './components/dogs/AllDogs';
+import ViewDog from './components/dogs/ViewDog';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -34,6 +36,12 @@ function App() {
         </Route>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
+        </Route>
+        <Route path='/dogs' exact={true}>
+          <AllDogs />
+        </Route>
+        <Route path='/dogs/:id' exact={true}>
+          <ViewDog />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>

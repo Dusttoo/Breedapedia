@@ -6,14 +6,14 @@ dog_routes = Blueprint('dogs', __name__)
 
 
 @dog_routes.route('/')
-@login_required
 def dogs():
     dogs = Dog.query.all()
-    return {'users': [dog.to_dict() for dog in dogs]}
+    return {'dogs': [dog.to_dict() for dog in dogs]}
 
 
-@dog_routes.route('/<int:id>/dogs')
-@login_required
+@dog_routes.route('/<int:id>')
 def user(id):
-    dog = User.query.get(id)
-    return user.to_dict()
+    dog = Dog.query.get(id)
+    print(f'\n\n\n{dog}\n\n\n')
+
+    return dog.to_dict()
