@@ -1,0 +1,44 @@
+.dashboard {
+    margin: 1rem;
+    height: 100%;
+}
+
+.dashboard__title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.dashboard__content-container {
+    display: grid;
+        grid-template-columns: 25% 75%;
+        grid-template-areas:
+            "sidebar main";
+}
+
+.dashboard__main-content {
+    grid-area: main;
+}
+
+/* Sidebar Styles */
+.dashboard__sidebar {
+    grid-area: sidebar;
+    background-color: var(--dark-blue);
+    border-radius: 5px;
+    height: 100%;
+    padding: 1rem;
+}
+
+.dashboard__sidebar-nav {
+
+}
+
+.dashboard__sidebar-nav-item {
+    color: white;
+    padding: .25rem;
+}
+
+.dashboard__sidebar-nav-item:hover {
+    color: var(--gold);
+    cursor: pointer;
+}
