@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
   const user = useSelector((state) => state.session.user)
-  console.log(user)
   return (
     <>
       <h1>This is my dashboard</h1>
