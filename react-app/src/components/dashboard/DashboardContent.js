@@ -12,7 +12,7 @@ const DashboardContent = ({user, page, setPage, dog, setDog}) => {
         {page === 'dogs' ? <MyDogs user={user} setPage={setPage} setDog={setDog}/>  
         : page === 'messages' ? <Messages />
         : page === 'classifieds' ? <MyClassifieds /> 
-        : page === 'dogid' ? <ViewDog dog={dog}/> 
+        : page === 'dogid' ? <ViewDog dogId={dog.id}/> 
         : <UserDetails user={user}/>}
     </div>
   );
