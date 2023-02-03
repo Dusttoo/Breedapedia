@@ -2,7 +2,6 @@ from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
-
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -15,6 +14,7 @@ class User(db.Model, UserMixin):
     profile_img = db.Column(db.String(255), nullable=False)
     registered_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
+    dogs = db.relationship('Dog', back_populates='owners')
 
     @property
     def password(self):
