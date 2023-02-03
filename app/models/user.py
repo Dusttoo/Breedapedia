@@ -16,6 +16,7 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(db.DateTime, nullable=False)
     dogs = db.relationship('Dog', back_populates='owners')
 
+
     @property
     def password(self):
         return self.hashed_password
@@ -27,6 +28,7 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -36,5 +38,6 @@ class User(db.Model, UserMixin):
             'last_name': self.last_name,
             'profile_img': self.profile_img,
             'registered_at': self.registered_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
+            'dogs': self.dogs
         }

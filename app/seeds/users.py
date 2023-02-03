@@ -10,7 +10,7 @@ def seed_users():
         password='password',
         first_name = 'Demo',
         last_name = 'Smith',
-        profile_img = 'https://pics.freeicons.io/uploads/icons/png/5722348461605810028-512.png',
+        profile_img='https://images.pexels.com/photos/733416/pexels-photo-733416.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
         registered_at= datetime.datetime.now(),
         updated_at= datetime.datetime.now())
 
