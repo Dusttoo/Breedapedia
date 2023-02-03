@@ -4,9 +4,12 @@ import './dashboard.css'
 const DashboardSidebar = ({setPage}) => {
   return (
     <div className='dashboard__sidebar'>
-        <p onClick={() => setPage('dogs')}>My dogs</p>
-        <p onClick={() => setPage('messages')}>My Messages</p>
-        <p onClick={() => setPage('classifieds')}>My Classifieds</p>
+        <ul className='dashboard__sidebar-nav'>
+            <li className='dashboard__sidebar-nav-item' onClick={() => setPage('Main')}>My Profile</li>
+            <li className='dashboard__sidebar-nav-item' onClick={() => setPage('dogs')}>My Dogs</li>
+            <li className='dashboard__sidebar-nav-item' onClick={() => setPage('messages')}>My Messages</li>
+            <li className='dashboard__sidebar-nav-item' onClick={() => setPage('classifieds')}>My Classifieds</li>
+        </ul>
     </div>
     
   );

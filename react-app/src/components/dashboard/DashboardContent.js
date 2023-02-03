@@ -3,6 +3,7 @@ import MyDogs from '../dogs/MyDogs'
 import Messages from '../messages/Messages'
 import MyClassifieds from '../classifieds/MyClassifieds'
 import './dashboard.css'
+import UserDetails from '../user/UserDetails';
 
 const DashboardContent = ({user, page}) => {
   return (
@@ -10,9 +11,7 @@ const DashboardContent = ({user, page}) => {
         {page === 'dogs' ? <MyDogs />  
         : page === 'messages' ? <Messages />
         : page === 'classifieds' ? <MyClassifieds /> 
-        : <div>
-            Main Page
-        </div>}
+        : <UserDetails user={user}/>}
     </div>
   );
 };

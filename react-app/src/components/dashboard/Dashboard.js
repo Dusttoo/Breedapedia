@@ -10,7 +10,7 @@ const Dashboard = () => {
   console.log(page)
   return (
     <div className='dashboard'>
-      <h1 className='dashboard__title'>This is my dashboard</h1>
+      <h1 className='dashboard__title'>Welcome, {user.first_name}</h1>
       <div className='dashboard__content-container'>
         <DashboardSidebar setPage={setPage}/>
         <DashboardContent user={user} page={page} />
