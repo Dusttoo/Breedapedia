@@ -20,5 +20,4 @@
 
    ```bash
    flask run
-   ```
 
