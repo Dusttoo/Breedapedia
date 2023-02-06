@@ -1,0 +1,62 @@
+.dogs__my-list {
+    margin: 0 1rem;
+}
+
+.dogs__dog-link {
+    padding: .25rem;
+}
+
+.dogs__dog-link:hover {
+    cursor: pointer;
+    color: var(--gold);
+}
+
+
+/* Individual Dog View */
+.dogs__dog-details {
+    margin: 2rem;
+    height: 100%;
+}
+
+.dogs__dog-details-con {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    grid-template-rows: 50% 50%;
+    grid-template-areas:
+        "image info"
+        "ped ped";
+    height: 1000px;
+}
+
+.dogs__dog-details-img {
+    grid-area: image;
+    width: 8rem;
+}
+
+.dogs__dog-details-info {
+    grid-area: info;
+}
+
+.dogs__dog-details-ped {
+    grid-area: ped;
+}
+
+/* Pedigree styles */
+.dogs__pedigree {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dogs__pedigree-img {
+    max-height: 5rem;
+    max-width: 5rem;
+    padding: 1rem;
+}
+
+.dogs__pedigree-1st {
+}
+
+.dogs__pedigree-2nd {
+}

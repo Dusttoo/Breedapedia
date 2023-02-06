@@ -7,7 +7,8 @@ def seed_colors():
     colors = [
         Color(name='Black'),
         Color(name='White'),
-        Color(name='Blue')
+        Color(name='Blue'),
+        Color(name='Fawn'),
         ]
 
     db.session.add_all(colors)

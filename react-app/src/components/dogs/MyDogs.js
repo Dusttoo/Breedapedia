@@ -1,4 +1,5 @@
 import React from 'react';
+import './dogs.css'
 
 const MyDogs = ({user, setPage, setDog}) => {
   const processClick = (dog) => {
@@ -9,7 +10,7 @@ const MyDogs = ({user, setPage, setDog}) => {
     <div className='dogs__my-list'>
       {user.dogs.map((dog) => {
         return (
-          <p key={dog.id}
+          <p className='dogs__dog-link' key={dog.id}
           onClick={() => processClick(dog)}>{dog.reg_name}</p>
         )
       })}

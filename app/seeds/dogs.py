@@ -14,9 +14,10 @@ def seed_dogs():
             breed_id=1,
             weight='56lbs',
             height='18in',
-            color_id=1,
+            color_id=4,
             gender='Male',
             titles='Ch',
+            img_url='https://images.pexels.com/photos/2208743/pexels-photo-2208743.jpeg'
         ),
         Dog(
             owner_id=1,
@@ -27,9 +28,10 @@ def seed_dogs():
             breed_id=1,
             weight='56lbs',
             height='18in',
-            color_id=1,
+            color_id=3,
             gender='Female',
             titles='Ch',
+            img_url='https://images.pexels.com/photos/103536/pexels-photo-103536.jpeg'
         ),
         Dog(
             owner_id=1,
@@ -45,6 +47,7 @@ def seed_dogs():
             color_id=1,
             gender='Male',
             titles='Ch',
+            img_url='https://images.pexels.com/photos/11556918/pexels-photo-11556918.jpeg'
         )]
 
     db.session.add_all(dogs)

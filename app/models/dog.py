@@ -25,6 +25,7 @@ class Dog(db.Model):
     color_id = db.Column(db.Integer, db.ForeignKey('colors.id'))
     gender = db.Column(db.String(6), nullable=False)
     titles = db.Column(db.String(255))
+    img_url = db.Column(db.String())
 
 
     sire = db.relationship('Dog', remote_side=[id], foreign_keys=[sire_id])
@@ -55,5 +56,6 @@ class Dog(db.Model):
             'color_id': self.color_id,
             'color': self.colors.to_dict() if self.colors else None,
             'gender': self.gender,
-            'titles': self.titles
+            'titles': self.titles,
+            'image': self.img_url
         }
