@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 const ViewDog = ({dogId}) => {
     const { id } = useParams();
@@ -22,7 +22,7 @@ const ViewDog = ({dogId}) => {
             setDog(data)
         }
     })();
-    }, []);
+    }, [id, dogId]);
   return (
     <div className='dogs__dog-details'>
         {dog && 
@@ -31,9 +31,14 @@ const ViewDog = ({dogId}) => {
             <p>Call Name: {dog.call_name}</p>
             <p>Birthdate: {dog.birthdate}</p>
             <p>Gender: {dog.gender}</p>
+            <p>Breed: {dog.breed.name}</p>
+            <p>Color: {dog.color.name}</p>
+            {dog.dam && <NavLink to={`/dogs/${dog.dam.id}`}>Dam: {dog.dam.reg_name}</NavLink>}
+            {dog.sire && <NavLink to={`/dogs/${dog.sire.id}`}>Sire: {dog.dam.reg_name}</NavLink>}
             <p>Titles: {dog.titles}</p>
             <p>Weight: {dog.weight}</p>
             <p>Height: {dog.height}</p>
+            <p>Owner: </p>
         </>
         }
         

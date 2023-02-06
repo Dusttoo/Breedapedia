@@ -29,7 +29,7 @@ class Dog(db.Model):
 
     sire = db.relationship('Dog', remote_side=[id], foreign_keys=[sire_id])
     dam = db.relationship('Dog', remote_side=[id], foreign_keys=[dam_id])
-    owners = db.relationship('User', secondary=user_dog, back_populates='dogs')
+    owners = db.relationship('User', back_populates='dogs')
     colors = db.relationship('Color', back_populates='dogs')
     breed = db.relationship('Breed', back_populates='dogs')
 
@@ -37,23 +37,23 @@ class Dog(db.Model):
         return {
             'id': self.id,
             'owner_id': self.owner_id,
-            # 'owners': self.owners,
+            # 'owners': self.owners.to_dict(),
             'sire_id': self.sire_id,
-            # 'sire': self.sire,
+            'sire': self.sire.to_dict() if self.sire else None,
             'dam_id': self.dam_id,
-            # 'dam': self.dam,
+            'dam': self.dam.to_dict() if self.dam else None,
             'reg_name': self.reg_name,
             'reg_number': self.reg_number,
             'call_name': self.call_name,
             'birthdate': self.birth_date,
             'deathdate': self.death_date,
             'breed_id': self.breed_id,
-            # 'breed': self.breed,
+            'breed': self.breed.to_dict() if self.breed else None,
             'weight': self.weight,
             'height': self.height,
             'head_size': self.head_size,
             'color_id': self.color_id,
-            # 'color': self.colors,
+            'color': self.colors.to_dict() if self.colors else None,
             'gender': self.gender,
             'titles': self.titles
         }

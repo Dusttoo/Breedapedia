@@ -23,12 +23,8 @@ def authenticate():
     """
     Authenticates a user.
     """
-    print(f'\n\n\n{[dog.to_dict() for dog in current_user.dogs]}\n\n\n')
-
     if current_user.is_authenticated:
-        user = current_user.to_dict()
-        user['dogs'] = [dog.to_dict() for dog in current_user.dogs]
-        return user
+        return current_user.to_dict()
     return {'errors': ['Unauthorized']}
 
 
