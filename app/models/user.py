@@ -1,6 +1,7 @@
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from .dog import user_dog
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -39,5 +40,5 @@ class User(db.Model, UserMixin):
             'profile_img': self.profile_img,
             'registered_at': self.registered_at,
             'updated_at': self.updated_at,
-            'dogs': self.dogs
+            'dogs': [dog.to_dict() for dog in self.dogs]
         }
