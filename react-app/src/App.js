@@ -11,6 +11,7 @@ import { authenticate } from './store/session';
 import Dashboard from './components/dashboard/Dashboard';
 import AllDogs from './components/dogs/AllDogs';
 import ViewDog from './components/dogs/ViewDog';
+import Landing from './components/landing/Landing';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -42,6 +43,9 @@ function App() {
         </Route>
         <Route path='/dogs/:id' exact={true}>
           <ViewDog />
+        </Route>
+        <Route path='/' exact={true}>
+          <Landing />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
