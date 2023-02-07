@@ -21,3 +21,5 @@
    ```bash
    flask run
 
+   flask
+
