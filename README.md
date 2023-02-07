@@ -21,5 +21,5 @@
    ```bash
    flask run
 
-   flask
+   flask test
 
