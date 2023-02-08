@@ -1,6 +1,13 @@
 .landing {
-    /* height: 100%;
-    width: 100%; */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: 
+    "hero hero hero"
+    "login login login"
+    "new new new"
+    "articles . featured"
+    "kennels kennels kennels";
+    grid-gap: 2rem;
 }
 
 .landing__hero-box {
@@ -10,6 +17,7 @@
     background-position: center;
     background-size: cover;
     padding: 2rem;
+    grid-area: hero;
 }
 
 .landing__hero-title {
@@ -26,10 +34,63 @@
     border-radius: .25rem;
     padding: .5rem;
     margin: .5rem 0;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .landing__hero-button:hover {
     cursor: pointer;
     color: var(--gold);
     background-color: var(--dark-blue);
+}
+
+.landing__login-signup {
+    grid-area: login;
+    /* height: 15vh; */
+    margin: 0 1rem;
+}
+
+.landing__login-signup-title {
+    font-size: 2rem;
+    text-align: center;
+    color: var(--orange);
+    padding: .25rem;
+}
+
+.landing__login-signup-content {
+    padding: .25rem;
+}
+
+.landing__login-signup-button {
+        font-size: 1rem;
+        color: var(--dark-blue);
+        text-align: right;
+        background-color: var(--gold);
+        border: 1px solid var(--orange);
+        border-radius: .25rem;
+        padding: .5rem;
+        margin: .5rem 0;
+        text-decoration: none;
+        display: inline-block;
+}
+
+.landing__new-content {
+    grid-area: new;
+    /* height: 15vh; */
+    margin: 0 1rem;
+}
+
+.landing__articles {
+    grid-area: articles;
+    margin: 0 1rem;
+}
+
+.landing__kennels {
+    grid-area: kennels;
+    margin: 0 1rem;
+}
+
+.landing__featured {
+    grid-area: featured;
+    margin: 0 1rem;
 }
