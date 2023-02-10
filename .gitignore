@@ -190,5 +190,6 @@ sketch
 .env.example
 .flaskenv
 .github/
+.private/
 
 # End of https://www.toptal.com/developers/gitignore/api/python,react

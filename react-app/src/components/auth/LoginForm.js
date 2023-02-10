@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { login } from '../../store/session';
+import { login, googleLogin } from '../../store/session';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { GoogleLogin } from '@react-oauth/google';
@@ -12,7 +12,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
-
+  
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
@@ -68,10 +68,12 @@ const LoginForm = () => {
         <button className='login__submit' type='submit'>Login</button>
         <GoogleLogin
           onSuccess={credentialResponse => {
-            console.log(credentialResponse);
+            dispatch(googleLogin(credentialResponse.credential))
           }}
           onError={() => {
-            console.log('Login Failed');
+            return (
+              <p>Houston we have a problem.</p>
+            )
           }}
         />
         <div className='login__signup-con'>
