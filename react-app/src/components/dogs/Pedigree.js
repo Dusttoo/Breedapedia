@@ -46,7 +46,6 @@ const Pedigree = ({dogId}) => {
             <div className='dogs__pedigree-2nd '>
             {parents &&
                 parents.map((parent) => {
-                    console.log(parent)
                     return (
                         <img className='dogs__pedigree-img' src={parent.image} alt={parent.reg_name} />
 

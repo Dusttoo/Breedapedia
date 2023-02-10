@@ -4,12 +4,14 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import generate_csrf
 from flask_login import LoginManager
+from flask_mail import Mail
 
 from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.dog_routes import dog_routes
 from .api.google_routes import google_routes
+from .api.pass_reset_routes import password_routes
 
 from .seeds import seed_commands
 
@@ -26,6 +28,21 @@ def load_user(id):
     return User.query.get(int(id))
 
 
+# initialize Flask Mail
+# app.config['MAIL_SERVER'] = 'smtp.dustymumphrey.com'
+# app.config['MAIL_PORT'] = 465
+# app.config['MAIL_USE_SSL'] = True
+# app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+# app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+app.config['MAIL_SERVER'] = 'sandbox.smtp.mailtrap.io'
+app.config['MAIL_PORT'] = 2525
+app.config['MAIL_USERNAME'] = 'da7154891a0ee4'
+app.config['MAIL_PASSWORD'] = 'a1736d97575897'
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+mail = Mail(app)
+
+
 # Tell flask about our seed commands
 app.cli.add_command(seed_commands)
 
@@ -34,6 +51,8 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(dog_routes, url_prefix='/api/dogs')
 app.register_blueprint(google_routes, url_prefix='/api/google')
+app.register_blueprint(password_routes, url_prefix='/api/password-reset')
+
 db.init_app(app)
 Migrate(app, db)
 

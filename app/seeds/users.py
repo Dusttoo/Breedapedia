@@ -11,6 +11,7 @@ def seed_users():
         first_name = 'Demo',
         last_name = 'Smith',
         profile_img='https://images.pexels.com/photos/733416/pexels-photo-733416.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        google_user=False,
         registered_at= datetime.datetime.now(),
         updated_at= datetime.datetime.now())
 

@@ -14,6 +14,4 @@ def dogs():
 @dog_routes.route('/<int:id>')
 def user(id):
     dog = Dog.query.get(id)
-    print(f'\n\n\n{dog}\n\n\n')
-
     return dog.to_dict()

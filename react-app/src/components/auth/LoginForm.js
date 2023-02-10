@@ -1,9 +1,7 @@
 import React, { useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { login, googleLogin } from '../../store/session';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { GoogleLogin } from '@react-oauth/google';
 
 const LoginForm = () => {
@@ -64,7 +62,7 @@ const LoginForm = () => {
             onChange={updatePassword}
           />
         </div>
-        <p className='login__forgot-pass'>Forgot password?</p>
+        <NavLink to='/password-reset' className='login__forgot-pass'>Forgot password?</NavLink>
         <button className='login__submit' type='submit'>Login</button>
         <GoogleLogin
           onSuccess={credentialResponse => {
@@ -77,12 +75,7 @@ const LoginForm = () => {
           }}
         />
         <div className='login__signup-con'>
-            <p>No account? Sign up using:</p>
-            <div>
-              <FontAwesomeIcon icon={faCircle} />
-            </div>
-            <p>Or create an account here</p>
-
+            <span>No account? <NavLink to='/sign-up'>Sign up</NavLink></span>
         </div>
 
       </form>

@@ -3,13 +3,13 @@ import pathlib
 import datetime
 from flask import Blueprint, request
 from flask_login import login_user
+from app.forms import GoogleAuthForm
 from app.models import User, db
+from app.utils.validation import validation_errors_to_error_messages
 
 import google.auth.transport.requests
 from google.oauth2 import id_token
 
-from app.forms import GoogleAuthForm
-import os
 
 GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
 client_secrets_file = os.path.join(
@@ -17,13 +17,6 @@ client_secrets_file = os.path.join(
 google_request = google.auth.transport.requests.Request()
 
 google_routes = Blueprint('google', __name__)
-
-def validation_errors_to_error_messages(validation_errors):
-    errorMessages = []
-    for field in validation_errors:
-        for error in validation_errors[field]:
-            errorMessages.append(f'{field} : {error}')
-    return errorMessages
 
 @google_routes.route('/')
 def google():
@@ -53,6 +46,7 @@ def google_signin():
             first_name=id_info['given_name'],
             last_name=id_info['family_name'],
             profile_img=id_info['picture'],
+            google_user = True,
             registered_at=datetime.datetime.now(),
             updated_at=datetime.datetime.now()
         )

@@ -37,11 +37,6 @@ const NavBar = () => {
             Login
           </NavLink>
         </li> }
-        {!user && <li className='navbar__list-item'>
-          <NavLink to='/sign-up' exact={true} activeClassName='active'>
-            Sign Up
-          </NavLink>
-        </li> }
         {user && 
         <li className='navbar__list-item'>
           <NavLink to='/dashboard' exact={true} activeClassName='active'>

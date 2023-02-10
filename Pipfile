@@ -33,6 +33,9 @@ boto3 = "*"
 authlib = "*"
 google-auth-oauthlib = "*"
 google = "*"
+flask-mail = "*"
+jwt = "*"
+flask-jwt-extended = "*"
 
 [dev-packages]
 

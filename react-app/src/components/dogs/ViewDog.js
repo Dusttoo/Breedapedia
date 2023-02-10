@@ -18,7 +18,6 @@ const ViewDog = ({dogId}) => {
             if (data.errors) {
                 return;
             }
-            console.log(data)
             setDog(data)
         }
     })();

@@ -12,7 +12,8 @@ import Dashboard from './components/dashboard/Dashboard';
 import AllDogs from './components/dogs/AllDogs';
 import ViewDog from './components/dogs/ViewDog';
 import Landing from './components/landing/Landing';
-
+import PassReset from './components/auth/PassReset';
+import UpdatePass from './components/auth/UpdatePassword'
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -37,6 +38,12 @@ function App() {
         </Route>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
+        </Route>
+        <Route path='/password-reset' exact={true}>
+          <PassReset />
+        </Route>
+        <Route path='/password-reset/:token' exact={true}>
+          <UpdatePass />
         </Route>
         <Route path='/dogs' exact={true}>
           <AllDogs />
