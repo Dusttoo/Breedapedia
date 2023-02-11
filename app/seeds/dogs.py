@@ -48,7 +48,38 @@ def seed_dogs():
             gender='Male',
             titles='Ch',
             img_url='https://images.pexels.com/photos/11556918/pexels-photo-11556918.jpeg'
-        )]
+        ),
+        Dog(
+            owner_id=2,
+            reg_name='ABC Jaugernat',
+            reg_number='C123457',
+            call_name='Test',
+            birth_date=datetime.datetime.now(),
+            breed_id=1,
+            weight='56lbs',
+            height='18in',
+            color_id=1,
+            gender='Female',
+            titles='Ch',
+            img_url='https://images.pexels.com/photos/11556918/pexels-photo-11556918.jpeg'
+        ),
+        Dog(
+            owner_id=2,
+            sire_id=3,
+            dam_id=4,
+            reg_name='ABC Tally',
+            reg_number='C123458',
+            call_name='Test',
+            birth_date=datetime.datetime.now(),
+            breed_id=1,
+            weight='56lbs',
+            height='18in',
+            color_id=1,
+            gender='Male',
+            titles='Ch',
+            img_url='https://images.pexels.com/photos/11556918/pexels-photo-11556918.jpeg'
+        ),
+        ]
 
     db.session.add_all(dogs)
 

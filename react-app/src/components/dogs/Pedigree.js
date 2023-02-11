@@ -3,7 +3,9 @@ import React, {useState, useEffect} from 'react';
 const Pedigree = ({dogId}) => {
     const [dog, setDog] = useState(null)
     const [parents, setParents] = useState()
-    const generations = 0;
+    let generation = 0;
+    const queue = []
+    const familyTree = []
 
     useEffect(() => {
     (async () => {
@@ -23,20 +25,28 @@ const Pedigree = ({dogId}) => {
     })();
     }, []);
 
-    // const getParents = (dog) => {
-    //     console.log(dog)
-    //     const parents = []
-    //         if(dog.sire) {
-    //             parents.push(dog.sire)
-    //         }
-    //         if(dog.dam) {
-    //             parents.push(dog.dam)
-    //         }
-        
-    //     setParents(parents)
-    // }
+    const enqueue = (node) => {
+        queue.push(node)
+    }
 
-    // getParents()
+    const dequeue = (node) => {
+        queue.shift()
+    }
+
+    const getFamilyTree = (dog) => {
+        let currrentDog = {}
+        if(!queue.length) {
+            currrentDog = dog
+            enqueue(dog)
+        }
+
+        for(let i=0; i < queue.length; i++){
+
+        }
+
+    }
+
+    getFamilyTree()
 
   return (
     <>
@@ -47,7 +57,10 @@ const Pedigree = ({dogId}) => {
             {parents &&
                 parents.map((parent) => {
                     return (
-                        <img className='dogs__pedigree-img' src={parent.image} alt={parent.reg_name} />
+                        // <img className='dogs__pedigree-img' src={parent.image} alt={parent.reg_name} />
+                        <div>
+                        {parent ? <p>{parent.reg_name}</p> : <p>Not tracked</p>}
+                        </div>
 
                     )
                 })

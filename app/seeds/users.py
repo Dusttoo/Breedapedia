@@ -15,8 +15,21 @@ def seed_users():
         registered_at= datetime.datetime.now(),
         updated_at= datetime.datetime.now())
 
+    demo2 = User(
+        username='Dusty',
+        email='dusty.mumphrey@gmail.com',
+        password='password',
+        first_name='Dusty',
+        last_name='Mumphrey',
+        profile_img='https://images.pexels.com/photos/733416/pexels-photo-733416.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        google_user=True,
+        registered_at=datetime.datetime.now(),
+        updated_at=datetime.datetime.now())
+
 
     db.session.add(demo)
+    db.session.add(demo2)
+
 
     db.session.commit()
 
