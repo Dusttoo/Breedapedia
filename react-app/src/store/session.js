@@ -70,7 +70,7 @@ export const logout = () => async (dispatch) => {
 };
 
 
-export const signUp = (username, email, password) => async (dispatch) => {
+export const signUp = (username, email, password, firstName, lastName, profileImg) => async (dispatch) => {
   const response = await fetch('/api/auth/signup', {
     method: 'POST',
     headers: {
@@ -80,12 +80,91 @@ export const signUp = (username, email, password) => async (dispatch) => {
       username,
       email,
       password,
+      firstName,
+      lastName,
+      profileImg
     }),
   });
   
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+}
+
+export const googleLogin = (credential) => async (dispatch) => {
+  const response = await fetch('/api/google/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      credential
+    })
+  });
+  
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(setUser(data))
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+
+}
+
+export const passReset = (email) => async (dispatch) => {
+  const response = await fetch('/api/password-reset/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      email,
+    }),
+  });
+  
+  if (response.ok) {
+    const data = await response.json();
+    // dispatch(setUser(data))
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+}
+
+export const passUpdate = (token, password) => async (dispatch) => {
+  const response = await fetch(`/api/password-reset/${token}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      password,
+    }),
+  });
+  
+  if (response.ok) {
+    const data = await response.json();
+    // dispatch(setUser(data))
     return null;
   } else if (response.status < 500) {
     const data = await response.json();

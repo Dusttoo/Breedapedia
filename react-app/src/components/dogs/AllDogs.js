@@ -20,11 +20,9 @@ const AllDogs = () => {
     })();
     }, []);
 
-    console.log(dogs)
     return (
     <div className='dogs__list'>
         {dogs && dogs.map((dog) => {
-            console.log(dog)
         return (
             <NavLink to={`/dogs/${dog.id}`} exact={true} activeClassName='active' key={dog.id}>{dog.reg_name}</NavLink>
         )

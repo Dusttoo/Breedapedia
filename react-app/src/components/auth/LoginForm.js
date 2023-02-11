@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { login } from '../../store/session';
+import { NavLink, Redirect } from 'react-router-dom';
+import { login, googleLogin } from '../../store/session';
+import { GoogleLogin } from '@react-oauth/google';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -9,7 +10,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
-
+  
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
@@ -31,34 +32,61 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={onLogin}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
-      </div>
-      <div>
-        <label htmlFor='email'>Email</label>
-        <input
-          name='email'
-          type='text'
-          placeholder='Email'
-          value={email}
-          onChange={updateEmail}
+    <div className='login'>
+      <div className='login__container'>
+      <form className='login__form' onSubmit={onLogin}>
+        <h2 className='login__form-title'>Log In</h2>
+        <div className='login__errors'>
+          {errors.map((error, ind) => (
+            <div key={ind}>{error}</div>
+          ))}
+        </div>
+        <div className='login__input-section'>
+          <label className='login__label' htmlFor='email'>Email</label>
+          <input
+            className='login__input'
+            name='email'
+            type='text'
+            placeholder='Email'
+            value={email}
+            onChange={updateEmail}
+          />
+        </div>
+        <div className='login__input-section'>
+          <label className='login__label' htmlFor='password'>Password</label>
+          <input
+            className='login__input'
+            name='password'
+            type='password'
+            placeholder='Password'
+            value={password}
+            onChange={updatePassword}
+          />
+        </div>
+        <NavLink to='/password-reset' className='login__forgot-pass'>Forgot password?</NavLink>
+        <button className='login__submit' type='submit'>Login</button>
+        <p>Or sign in with google:</p>
+        <GoogleLogin
+          onSuccess={credentialResponse => {
+            dispatch(googleLogin(credentialResponse.credential))
+          }}
+          onError={() => {
+            return (
+              <p>Houston we have a problem.</p>
+            )
+          }}
         />
+        <div className='login__signup-con'>
+            <span className='login__signup-button'>No account? <NavLink to='/sign-up' className={'login__signup-link'}>Sign up</NavLink></span>
+        </div>
+
+      </form>
+      <div className='login__info-section'>
+        <h2 className='login__info-header'>Welcome Back!</h2>
+
       </div>
-      <div>
-        <label htmlFor='password'>Password</label>
-        <input
-          name='password'
-          type='password'
-          placeholder='Password'
-          value={password}
-          onChange={updatePassword}
-        />
-        <button type='submit'>Login</button>
       </div>
-    </form>
+    </div>
   );
 };
 

@@ -1,3 +1,131 @@
+/* Login Styles */
+.login {
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 1rem;
+    background-color: var(--dark-blue);
+    background-image: url('https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+    background-position: center;
+}
+
+.login__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "login info";
+    max-width: 50vw;
+}
+
+.login__form-title {
+    color: var(--dark-blue);
+    font-size: 2rem;
+}
+
+.login__form {
+    grid-area: login;
+    border-radius: .5rem 0 0 .5rem;
+    background-color: white;
+    margin-top: 2rem;
+    height: 50vh;
+    padding: 1rem;
+    /* max-width: 25vw; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 1px 1px 15px -1px rgba(0, 0, 0,.1);
+}
+
+.login__errors {
+    color: rgb(231, 0, 0);
+    padding: .5rem;
+
+}
+
+.login__input-section {
+    background-color: white;
+    padding: 1rem;
+    border-radius: .25rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    width: 75%;
+}
+
+.login__label {
+    color: var(--gold);
+    padding-right: .5rem;
+    width: 25%;
+}
+
+.login__input {
+    border-bottom: 1px solid var(--gold);
+    height: 2rem;
+}
+
+.login__forgot-pass {
+    text-decoration: none;
+    color: var(--dark-blue)
+}
+
+.login__forgot-pass:hover {
+    color: var(--gold)
+}
+
+.login__signup-con {
+    
+}
+
+.login__submit {
+    font-size: 1rem;
+    color: var(--dark-blue);
+    text-align: right;
+    background-color: white;
+    border-radius: .25rem;
+    padding: .5rem;
+    margin: .5rem 0;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.login__submit:hover {
+    cursor: pointer;
+    background-color: var(--gold);
+    color: white;
+}
+
+.login__signup-button {
+
+}
+
+.login__signup-link {
+    
+}
+
+.login__info-section {
+    grid-area: info;
+    border-radius: 0 .5rem .5rem 0;
+    background-color: var(--dark-blue);
+    margin-top: 2rem;
+    height: 50vh;
+    padding: 1rem;
+    /* max-width: 25vw; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 1px 1px 15px -1px rgba(0, 0, 0, .1);
+}
+
+.login__info-header {
+    color: white;
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+
 /* Logout Styles */
 
 .logout__button {

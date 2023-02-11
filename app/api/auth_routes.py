@@ -1,22 +1,12 @@
-from flask import Blueprint, jsonify, session, request
+import datetime
+from flask import Blueprint, request
 from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
-from flask_login import current_user, login_user, logout_user, login_required
+from flask_login import current_user, login_user, logout_user
+from app.utils.validation import validation_errors_to_error_messages
 
 auth_routes = Blueprint('auth', __name__)
-
-
-def validation_errors_to_error_messages(validation_errors):
-    """
-    Simple function that turns the WTForms validation errors into a simple list
-    """
-    errorMessages = []
-    for field in validation_errors:
-        for error in validation_errors[field]:
-            errorMessages.append(f'{field} : {error}')
-    return errorMessages
-
 
 @auth_routes.route('/')
 def authenticate():
@@ -61,18 +51,26 @@ def sign_up():
     """
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
+    user = User.query.filter(User.email == form.data['email']).first()
+    if user and user.google_user:
+        return {'errors': 'Please log in with Google'}, 401
+    if form.validate_on_submit() and not user:
         user = User(
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            first_name=form.data['firstName'],
+            last_name=form.data['lastName'],
+            profile_img=form.data['profileImg'],
+            google_user=False,
+            registered_at=datetime.datetime.now(),
+            updated_at=datetime.datetime.now(),
         )
         db.session.add(user)
         db.session.commit()
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-
 
 @auth_routes.route('/unauthorized')
 def unauthorized():
