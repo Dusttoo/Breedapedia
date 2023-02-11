@@ -1,9 +1,10 @@
 /* Login Styles */
 .login {
     height: 100vh;
-    display: flex;
-    align-items: start;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "login info";
     padding: 1rem;
     background-color: var(--dark-blue);
     background-image: url('https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
@@ -16,14 +17,14 @@
 }
 
 .login__form {
-    border: 4px solid white;
-    border-radius: .5rem;
+    grid-area: login;
+    /* border: 4px solid white; */
+    border-radius: .5rem 0 0 .5rem;
     background-color: white;
     margin-top: 2rem;
-    /* opacity: .5; */
     height: 50vh;
     padding: 1rem;
-    width: 50vw;
+    max-width: 25vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -39,16 +40,18 @@
 
 .login__input-section {
     background-color: white;
-    /* margin: 1rem; */
     padding: 1rem;
     border-radius: .25rem;
     display: flex;
     align-items: flex-end;
+    justify-content: flex-start;
+    width: 75%;
 }
 
 .login__label {
     color: var(--gold);
     padding-right: .5rem;
+    width: 25%;
 }
 
 .login__input {
@@ -57,7 +60,12 @@
 }
 
 .login__forgot-pass {
+    text-decoration: none;
+    color: var(--dark-blue)
+}
 
+.login__forgot-pass:hover {
+    color: var(--gold)
 }
 
 .login__signup-con {
@@ -80,6 +88,31 @@
     cursor: pointer;
     background-color: var(--gold);
     color: white;
+}
+
+.login__signup-button {
+
+}
+
+.login__signup-link {
+    
+}
+
+.login__info-section {
+    grid-area: info;
+    /* border: 4px solid white; */
+    border-radius: 0 .5rem .5rem 0;
+    background-color: var(--dark-blue);
+    margin-top: 2rem;
+    height: 50vh;
+    padding: 1rem;
+    max-width: 25vw;
+    /* width: 50vw; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 1px 1px 15px -1px rgba(0, 0, 0, .1);
 }
 
 

@@ -64,6 +64,7 @@ const LoginForm = () => {
         </div>
         <NavLink to='/password-reset' className='login__forgot-pass'>Forgot password?</NavLink>
         <button className='login__submit' type='submit'>Login</button>
+        <p>Or sign in with google:</p>
         <GoogleLogin
           onSuccess={credentialResponse => {
             dispatch(googleLogin(credentialResponse.credential))
@@ -75,10 +76,11 @@ const LoginForm = () => {
           }}
         />
         <div className='login__signup-con'>
-            <span>No account? <NavLink to='/sign-up'>Sign up</NavLink></span>
+            <span className='login__signup-button'>No account? <NavLink to='/sign-up' className={'login__signup-link'}>Sign up</NavLink></span>
         </div>
 
       </form>
+      <div className='login__info-section'></div>
     </div>
   );
 };
