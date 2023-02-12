@@ -3,9 +3,10 @@ import React, {useState, useEffect} from 'react';
 const Pedigree = ({dogId}) => {
     const [dog, setDog] = useState(null)
     const [parents, setParents] = useState()
-    let generation = 0;
-    const queue = []
-    const familyTree = []
+    // const [generation, setGeneration] = useState(0)
+    const [maxGenerations, setMaxGenerations] = useState(4)
+    const [queue, setQueue] = useState([])
+    // const [familyTree, setFamilyTree] = useState([])
 
     useEffect(() => {
     (async () => {
@@ -23,30 +24,37 @@ const Pedigree = ({dogId}) => {
             setParents([data.sire, data.dam])
         }
     })();
+
     }, []);
 
-    const enqueue = (node) => {
-        queue.push(node)
-    }
-
-    const dequeue = (node) => {
-        queue.shift()
+    const calculateGen = () => {
+        let totalDogs = 1;
+        let thisGeneration = 1
+        for(let i=0; i < maxGenerations; i++) {
+            thisGeneration = thisGeneration * 2
+            totalDogs += thisGeneration
+        }
+        return totalDogs
     }
 
     const getFamilyTree = (dog) => {
-        let currrentDog = {}
-        if(!queue.length) {
-            currrentDog = dog
-            enqueue(dog)
+        const familyTree = [{'dog': dog, 'generation': 0}]
+        let currentCountDogs = 0
+        const totalNumDogs = calculateGen()
+
+        while (currentCountDogs < totalNumDogs) {
+            console.log(familyTree[currentCountDogs].dog?.reg_name)
+            familyTree.push({'dog': familyTree[currentCountDogs].dog?.sire, 'generation': Math.ceil(totalNumDogs)})
+            familyTree.push({'dog': familyTree[currentCountDogs].dog?.dam, 'generation': Math.round(totalNumDogs)})
+            currentCountDogs += 2
+            console.log(currentCountDogs)
         }
 
-        for(let i=0; i < queue.length; i++){
-
-        }
-
+        console.log('tree: ', familyTree)
+        return familyTree
     }
 
-    getFamilyTree()
+    if(dog) getFamilyTree(dog)
 
   return (
     <>
@@ -54,17 +62,17 @@ const Pedigree = ({dogId}) => {
         <div className='dogs__pedigree'>
             <img className='dogs__pedigree-1st dogs__pedigree-img' src={dog.image} alt={dog.reg_name} />
             <div className='dogs__pedigree-2nd '>
-            {parents &&
-                parents.map((parent) => {
+            {/* {parents && */}
+                {getFamilyTree(dog).map((parent) => {
                     return (
                         // <img className='dogs__pedigree-img' src={parent.image} alt={parent.reg_name} />
                         <div>
-                        {parent ? <p>{parent.reg_name}</p> : <p>Not tracked</p>}
+                        {parent.dog ? <p>{parent.dog.reg_name}</p> : <p>Not tracked</p>}
                         </div>
 
                     )
-                })
-            }
+                })}
+            {/* } */}
             </div>
         </div>
     }
