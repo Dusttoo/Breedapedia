@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
+import PedigreeBuilder, {calculateGen} from '../../utils/pedigree';
 
 const Pedigree = ({dogId}) => {
-    const [dog, setDog] = useState(null)
-    const [parents, setParents] = useState()
-    // const [generation, setGeneration] = useState(0)
+    const [dog, setDog] = useState({})
     const [maxGenerations, setMaxGenerations] = useState(4)
-    const [queue, setQueue] = useState([])
     // const [familyTree, setFamilyTree] = useState([])
+    const [totalDogs, setTotalDogs] = useState(0)
+    const [currentCount, setCurrentCount] = useState(0)
 
     useEffect(() => {
     (async () => {
@@ -20,41 +20,59 @@ const Pedigree = ({dogId}) => {
             if (data.errors) {
                 return;
             }
+            const total = calculateGen(maxGenerations)
+            setTotalDogs(total)
             setDog(data)
-            setParents([data.sire, data.dam])
+            const pedigree = buildPedigree(data)
+            console.log(pedigree)
+            // setFamilyTree(pedigree)
+            // console.log(familyTree)
+            // setTotalDogs(total)
         }
     })();
 
-    }, []);
+    }, [dog.id]);
 
-    const calculateGen = () => {
-        let totalDogs = 1;
-        let thisGeneration = 1
-        for(let i=0; i < maxGenerations; i++) {
-            thisGeneration = thisGeneration * 2
-            totalDogs += thisGeneration
+    /* 
+    take dog as param
+    set dog as current node
+    push dogs sire and dam to queue
+    go to 1st item in queue - set to current node
+    add it's sire and dam to queue - set as visited/ add to visted queue
+    pop current node, move to next item, repeat previous steps
+
+    during pop is when the dog should be added to the family tree
+    need to figure out how to preserve null values in the family tree
+
+    dog -> current node - update queue
+            [sire, dam] --> current node = sire - update queue -> [sire, dam, sire, dam]
+            pop sire from queue -> [dam, sire, dam] --> current node = dam - update queue -> [dam, sire, dam, sire, dam]
+            pop dam from queue -> [sire, dam, sire, dam]
+
+    NEED TO INCORPORATE MAX GENERATIONS
+    after queue is empty need to manipulate teh family tree data to the pedigree 
+    
+    */ 
+    const queue = []
+    const familyTree = []
+
+    const buildPedigree = (dog) => {
+        let currentDog = dog;
+        queue.push(currentDog?.sire, currentDog?.dam)
+        familyTree.push(currentDog?.sire, currentDog?.dam)
+
+        currentDog = queue.shift()
+        if (!currentDog && queue.length > 0) {
+            familyTree.push({})
+            currentDog = queue.shift()
         }
-        return totalDogs
-    }
-
-    const getFamilyTree = (dog) => {
-        const familyTree = [{'dog': dog, 'generation': 0}]
-        let currentCountDogs = 0
-        const totalNumDogs = calculateGen()
-
-        while (currentCountDogs < totalNumDogs) {
-            console.log(familyTree[currentCountDogs].dog?.reg_name)
-            familyTree.push({'dog': familyTree[currentCountDogs].dog?.sire, 'generation': Math.ceil(totalNumDogs)})
-            familyTree.push({'dog': familyTree[currentCountDogs].dog?.dam, 'generation': Math.round(totalNumDogs)})
-            currentCountDogs += 2
-            console.log(currentCountDogs)
+        if(familyTree.length < totalDogs) {
+            buildPedigree(currentDog)
         }
-
-        console.log('tree: ', familyTree)
-        return familyTree
+        console.log(familyTree)
+        // const newTree = familyTree.slice(0, totalDogs)
+        return familyTree.splice(0, totalDogs)
     }
-
-    if(dog) getFamilyTree(dog)
 
   return (
     <>
@@ -62,17 +80,7 @@ const Pedigree = ({dogId}) => {
         <div className='dogs__pedigree'>
             <img className='dogs__pedigree-1st dogs__pedigree-img' src={dog.image} alt={dog.reg_name} />
             <div className='dogs__pedigree-2nd '>
-            {/* {parents && */}
-                {getFamilyTree(dog).map((parent) => {
-                    return (
-                        // <img className='dogs__pedigree-img' src={parent.image} alt={parent.reg_name} />
-                        <div>
-                        {parent.dog ? <p>{parent.dog.reg_name}</p> : <p>Not tracked</p>}
-                        </div>
-
-                    )
-                })}
-            {/* } */}
+                {/* {pedigree} */}
             </div>
         </div>
     }
