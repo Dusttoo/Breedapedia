@@ -83,6 +83,12 @@ const AddDogs = () => {
                 ))}
                 </div>
                 <div>
+                    {/* Will need to add prompt that if a dog does not exist
+                    they will need to add the dog spereately.
+                    For now when they type in a dog that does not exist maybe it could create a relatively empty dog that they can edit?
+                    Maybe a pop up modal to add basic info about the parent and save them
+                    Could make sire and dam buttons a modal anyways. You can either choose an existing dog after selectinga breed
+                    Or add a new dog. Then the dog you add or select's id will be returned to the form */}
                     <label>Sire</label>
                     <select
                     onChange={(e) => setSireId(e.target.value)}
