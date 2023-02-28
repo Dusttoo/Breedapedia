@@ -3,10 +3,13 @@ import PedigreeBuilder, {calculateGen} from '../../utils/pedigree';
 
 const Pedigree = ({dogId}) => {
     const [dog, setDog] = useState({})
-    const [maxGenerations, setMaxGenerations] = useState(4)
-    // const [familyTree, setFamilyTree] = useState([])
+    const [maxGenerations, setMaxGenerations] = useState(2)
+    const [familyTree, setFamilyTree] = useState([])
     const [totalDogs, setTotalDogs] = useState(0)
     const [currentCount, setCurrentCount] = useState(0)
+    const queue = []
+    const familyTreeList = []
+    const level = 2
 
     useEffect(() => {
     (async () => {
@@ -24,8 +27,8 @@ const Pedigree = ({dogId}) => {
             setTotalDogs(total)
             setDog(data)
             const pedigree = buildPedigree(data)
-            console.log(pedigree)
-            // setFamilyTree(pedigree)
+            // console.log(pedigree)
+            setFamilyTree([...pedigree])
             // console.log(familyTree)
             // setTotalDogs(total)
         }
@@ -53,25 +56,25 @@ const Pedigree = ({dogId}) => {
     after queue is empty need to manipulate teh family tree data to the pedigree 
     
     */ 
-    const queue = []
-    const familyTree = []
+
 
     const buildPedigree = (dog) => {
         let currentDog = dog;
         queue.push(currentDog?.sire, currentDog?.dam)
-        familyTree.push(currentDog?.sire, currentDog?.dam)
+        familyTreeList.push(currentDog?.sire, currentDog?.dam)
 
         currentDog = queue.shift()
         if (!currentDog && queue.length > 0) {
-            familyTree.push({})
+            familyTreeList.push({})
             currentDog = queue.shift()
         }
-        if(familyTree.length < totalDogs) {
+        if(familyTreeList.length < totalDogs) {
             buildPedigree(currentDog)
         }
-        console.log(familyTree)
-        // const newTree = familyTree.slice(0, totalDogs)
-        return familyTree.splice(0, totalDogs)
+        // console.log(familyTreeList)
+        const newTree = familyTreeList.slice(0, totalDogs)
+        // console.log(newTree)
+        return familyTreeList
     }
 
   return (
@@ -80,7 +83,11 @@ const Pedigree = ({dogId}) => {
         <div className='dogs__pedigree'>
             <img className='dogs__pedigree-1st dogs__pedigree-img' src={dog.image} alt={dog.reg_name} />
             <div className='dogs__pedigree-2nd '>
-                {/* {pedigree} */}
+                {familyTree.map(dog => {
+                    return (
+                        <p>{dog ? dog.reg_name : <span>Not Tracked</span>}</p>
+                    )
+                })}
             </div>
         </div>
     }

@@ -5,6 +5,7 @@ import Pedigree from './Pedigree';
 const ViewDog = ({dogId}) => {
     const { id } = useParams();
     const [dog, setDog] = useState(null)
+    console.log(dog)
 
     useEffect(() => {
     (async () => {
@@ -35,7 +36,7 @@ const ViewDog = ({dogId}) => {
                 <p>Breed: {dog.breed.name}</p>
                 <p>Color: {dog.color.name}</p>
                 {dog.dam && <NavLink to={`/dogs/${dog.dam.id}`}>Dam: {dog.dam.reg_name}</NavLink>}
-                {dog.sire && <NavLink to={`/dogs/${dog.sire.id}`}>Sire: {dog.dam.reg_name}</NavLink>}
+                {dog.sire && <NavLink to={`/dogs/${dog.sire.id}`}>Sire: {dog.sire.reg_name}</NavLink>}
                 <p>Titles: {dog.titles}</p>
                 <p>Weight: {dog.weight}</p>
                 <p>Height: {dog.height}</p>
